@@ -73,9 +73,12 @@ class TrainStage(Stage):
                 timeout=240
             )
             # =================================== HARD CODED AMOUNT OF SAMPLES!!! ===================================
+          
             models = [learner.get_model().build_copy(params=v.weights, contributors=[k], num_samples=1) for k, v in train_results.items() if v is not None]
-            agg_models = aggregator.aggregate(models)
-            agg_models.set_contribution([state.addr], 666) 
+            
+            agg_models = aggregator.aggregate(models) #algun build aqui no va
+            
+            agg_models.set_contribution([state.addr], 900) 
 
             print(f"Aggregated model: {agg_models.get_num_samples()} samples")
 

@@ -18,12 +18,21 @@
 
 """Federated Averaging (FedAvg) Aggregator."""
 
+import os
+import pickle
+import signal
+import tempfile
 from typing import List
 
 import numpy as np
+import psutil
+import tensorflow as tf
 
 from p2pfl.learning.aggregators.aggregator import Aggregator, NoModelsToAggregateError
+from p2pfl.learning.exceptions import DecodingParamsError
 from p2pfl.learning.p2pfl_model import P2PFLModel
+from p2pfl.learning.tensorflowlite.keras_tflite_model import MLP, KerasTfliteModel
+from p2pfl.learning.tensorflowlite.temp import ModelTFLite
 
 
 class FedAvg(Aggregator):
@@ -68,5 +77,47 @@ class FedAvg(Aggregator):
         for m in models:
             contributors = contributors + m.get_contributors()
 
-        # Return an aggregated p2pfl model
+        # Return an aggregated p2pfl model AAAAAAAAAA
         return models[0].build_copy(params=accum, num_samples=total_samples, contributors=contributors)
+
+##############################################################################################################################    TEST
+
+class FedAvgTFLite(Aggregator):
+
+    def aggregate(self, models: List[KerasTfliteModel]) -> KerasTfliteModel:
+        """
+        Agrega los modelos TFLite.
+
+        Args:
+            models: Lista de modelos KerasTfliteModel.
+
+        Returns:
+            Un KerasTfliteModel con los pesos agregados.
+        """
+        if len(models) == 0:
+            raise NoModelsToAggregateError("No hay modelos para agregar")
+
+        total_samples = sum(m.get_num_samples() for m in models)
+
+
+        aggregated_model = MLP(generate_tflite=False)
+
+        for model in models:
+            weights_bytes = model.get_tflite_parameters()
+            
+            weight = model.get_num_samples() / total_samples
+
+            aggregated_model.aggregate(weights_bytes, weight)
+            
+
+        aggregated_weights_bytes = aggregated_model.extract_weights_from_tflite()
+
+
+
+        # Obtener contribuyentes
+        contributors = sum((m.get_contributors() for m in models), [])
+        # Crear y devolver un nuevo modelo con los pesos agregados
+        return models[0].build_copy(params=aggregated_weights_bytes, num_samples=total_samples, contributors=contributors)
+        
+
+

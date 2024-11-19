@@ -41,7 +41,7 @@ from p2pfl.communication.protocols.p2p.grpc.grpc_communication_protocol import (
 )
 from p2pfl.exceptions import LearnerRunningException, NodeRunningException, ZeroRoundsException
 from p2pfl.learning.aggregators.aggregator import Aggregator
-from p2pfl.learning.aggregators.fedavg import FedAvg
+from p2pfl.learning.aggregators.fedavg import FedAvg, FedAvgTFLite
 from p2pfl.learning.dataset.p2pfl_dataset import P2PFLDataset
 from p2pfl.learning.learner import NodeLearner
 from p2pfl.learning.p2pfl_model import P2PFLModel
@@ -61,8 +61,8 @@ class ProxyNode:
         model: P2PFLModel,
         address: str = "127.0.0.1",
         proxy_address: str = "127.0.0.1:50001",
-        learner: Type[NodeLearner] = LightningLearner,
-        aggregator: Type[Aggregator] = FedAvg,
+        learner: Type[NodeLearner] = None,
+        aggregator: Type[Aggregator] = FedAvgTFLite,
         protocol: Type[CommunicationProtocol] = GrpcCommunicationProtocol,
         **kwargs,
     ) -> None:

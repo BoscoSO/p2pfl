@@ -25,8 +25,8 @@ This node only starts, create a node2 and connect to it in order to start the fe
 import argparse
 
 from p2pfl.learning.dataset.p2pfl_dataset import P2PFLDataset
-from p2pfl.learning.pytorch.lightning_learner import LightningLearner
-from p2pfl.learning.pytorch.lightning_model import MLP, LightningModel
+from p2pfl.learning.tensorflowlite.keras_tflite_model import MLP, KerasTfliteModel
+from p2pfl.learning.tensorflowlite.keras_tflite_learner import KerasTfliteLearner
 from p2pfl.nodes.proxy_node import ProxyNode
 from p2pfl.utils.utils import set_test_settings
 
@@ -40,12 +40,12 @@ def __get_args() -> argparse.Namespace:
 
 
 def proxy_node(addr: str) -> None:
-    node = ProxyNode(LightningModel(MLP()), address=addr, learner=LightningLearner)
+    node = ProxyNode(KerasTfliteModel(MLP()), proxy_address=addr, learner=KerasTfliteLearner)
     node.start()
 
     input("Press any key to start learning\n")
 
-    node.set_start_learning(rounds=2, epochs=1)
+    node.set_start_learning(rounds=6, epochs=4)
 
     input("Press any key to stop\n")
 
