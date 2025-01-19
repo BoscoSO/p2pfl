@@ -1,3 +1,45 @@
+# Implementation for Mobile Device Connection to the P2PFL Network
+
+This project is part of the Bachelor's Thesis (TFG) titled:  
+**"Integration of a Decentralized Federated Learning Library in Mobile Devices"**.
+
+This branch contains the specific development required to enable mobile devices to connect to the decentralized federated learning (**P2PFL**) network. The implementations here are fundamental for establishing communication between mobile nodes and the proxy, enabling collaborative training.
+
+---
+
+## Project Description
+
+Decentralized federated learning is an innovative approach that allows multiple devices to collaborate on training machine learning models without sharing their local data. This approach is particularly relevant for mobile devices, where privacy and efficient data usage are crucial.
+
+In this branch, the following implementations have been developed:
+
+1. Configuration and adjustments to the **proxy node** to enable connections with mobile clients.
+2. Adaptation of the network architecture to support multiple devices.
+3. Implementation of TensorFlow and its conversion mechanisms to TFLite.
+4. Implementation of a new aggregation mechanism.
+---
+
+## Authorship
+
+This work has been carried out by **Bosco Suárez-LLanos Outeiriño** as part of the Bachelor's Thesis (TFG) at **UDC/Facultad de Ingeniería Informática**.  
+If you have questions, concerns, or feedback about this project, feel free to reach out.
+
+---
+
+## How to Use This Project
+To try this project, refer to the README of the main project.
+
+---
+
+## Contact
+
+**Author**: [Bosco Suárez-LLanos Outeiriño]  
+**Email**: [boscosuarezllo@gmail.com]  
+**Main Project Repository**: [Link to Repository](https://github.com/BoscoSO/Mobile_p2pfl)
+
+
+
+
 ![GitHub Logo](https://raw.githubusercontent.com/pguijas/p2pfl/main/other/logo.png)
 
 # P2PFL - Federated Learning over P2P networks
