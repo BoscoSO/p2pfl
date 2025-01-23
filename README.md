@@ -31,7 +31,7 @@ If you have questions, concerns, or feedback about this project, feel free to re
 To try this project, refer to the README of the main project. To clone with the main project use:
 
 ```bash
-git clone --recurse-submodules https://github.com/BoscoSO/p2pfl
+git clone --recurse-submodules https://github.com/BoscoSO/p2pfl.git
 ```
 
 
