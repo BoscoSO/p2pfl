@@ -33,6 +33,12 @@ To try this project, refer to the README of the main project. To clone with the 
 ```bash
 git clone --recurse-submodules https://github.com/BoscoSO/p2pfl.git
 ```
+or execute this to update it:
+
+```bash
+git submodule update --init --recursive
+```
+
 
 
 ---
